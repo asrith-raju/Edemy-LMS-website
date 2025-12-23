@@ -143,6 +143,19 @@ const CourseDetails = () => {
             </div>
 
             <button className='py-3 md:mt-6 mt-4 rounded bg-blue-600 text-white w-full font-medium '>{isAlreadyEnrolled ? 'Already Enrolled' : 'Enroll Now'}</button>
+
+            <div className='pt-6'>
+                <p className='md:text-xl text-xl font-medium text-gray-800 '>What's in the course?</p>
+                <ul className='ml-4 pt-2 text-sm md:text-default list-disc text-gray-500'>
+                  <li>Lifetime access with free updates.</li>
+                  <li>Step-by-step,hands-on project guidance.</li>
+                  <li>Downloadable resources and source code.</li>
+                  <li>Quizzes to test your Knowledge</li>
+                  <li>Certificate of completion</li>
+                </ul>
+            </div>
+
+
           </div>
 
         </div>
