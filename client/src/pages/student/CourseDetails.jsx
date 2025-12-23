@@ -14,7 +14,9 @@ const CourseDetails = () => {
 
   const [openSections, setOpenSections] = useState({})
 
-  const { allCourses, calculateRating, calculateChapterTime, calculateNoOfLectures, CalculateCourseDuration,currency } = useContext(AppContext)
+  const [isAlreadyEnrolled, setIsAlreadyEnrolled] = useState(false)
+
+  const { allCourses, calculateRating, calculateChapterTime, calculateNoOfLectures, CalculateCourseDuration, currency } = useContext(AppContext)
 
 
   const fetchCourseData = () => {
@@ -103,20 +105,45 @@ const CourseDetails = () => {
 
         </div>
         {/* Right column */}
-        <div className='max-w-course-card z-10 shadow-custom-card rounded-t md:rounded-none overflow-hidden bg-white min-w-[300px] sm:min-w-[420px]'> 
-           
-         <img src={courseData.courseThumbnail} alt="" />
-         <div className='p-5'>
-               <div className='flex items-center gap-2'>
-                <img src={assets.time_clock_icon} alt="clock_icon" className='w-3.5'/>
-                <p className='text-red-500'><span className='font-medium'>5 days</span> left at this price</p>
-               </div>
-               <div className='flex gap-3 items-center pt-2'>
-                <p className='text-gray-800 md:text-4xl text-2xl font-semibold'>{currency} {(courseData.coursePrice -courseData.discount * courseData.coursePrice /100).toFixed(2)}</p>
-                <p className='md:text-lg text-gray-500 line-through'>{currency} {courseData.coursePrice}</p>
-                <p className='md:text-lg text-gray-500'>{courseData.discount}% off</p>
-               </div>
-         </div>
+        <div className='max-w-course-card z-10 shadow-custom-card rounded-t md:rounded-none overflow-hidden bg-white min-w-[300px] sm:min-w-[420px]'>
+
+          <img src={courseData.courseThumbnail} alt="" />
+          <div className='p-5'>
+            <div className='flex items-center gap-2'>
+              <img src={assets.time_clock_icon} alt="clock_icon" className='w-3.5' />
+              <p className='text-red-500'><span className='font-medium'>5 days</span> left at this price</p>
+            </div>
+            <div className='flex gap-3 items-center pt-2'>
+              <p className='text-gray-800 md:text-4xl text-2xl font-semibold'>{currency} {(courseData.coursePrice - courseData.discount * courseData.coursePrice / 100).toFixed(2)}</p>
+              <p className='md:text-lg text-gray-500 line-through'>{currency} {courseData.coursePrice}</p>
+              <p className='md:text-lg text-gray-500'>{courseData.discount}% off</p>
+            </div>
+
+            <div className='flex items-center text-sm md:text-default gap-4 pt-2 md:pt-4 text-gray-500'>
+
+              <div className='flex items-center gap-1'>
+                <img src={assets.star} alt="star icon" />
+                <p>{calculateRating(courseData)}</p>
+              </div>
+
+              <div className='h-4 w-px bg-gray-400/40'></div>
+
+              <div className='flex items-center gap-1'>
+                <img src={assets.time_clock_icon} alt="clocl icon" />
+                <p>{CalculateCourseDuration(courseData)}</p>
+              </div>
+
+              <div className='h-4 w-px bg-gray-400/40'></div>
+                
+                <div className='flex items-center gap-1'>
+                <img src={assets.lesson_icon} alt="clocl icon" />
+                <p>{calculateNoOfLectures(courseData)} lessons</p>
+              </div>
+              
+            </div>
+
+            <button className='py-3 md:mt-6 mt-4 rounded bg-blue-600 text-white w-full font-medium '>{isAlreadyEnrolled ? 'Already Enrolled' : 'Enroll Now'}</button>
+          </div>
 
         </div>
       </div>

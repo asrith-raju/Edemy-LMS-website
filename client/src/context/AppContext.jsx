@@ -45,7 +45,7 @@ export const AppContextProvider = (props)=>{
      //Function to Calculate Course Duration
         const CalculateCourseDuration = (course)=>{
             let time = 0
-            course.courseContent.map((chapter)=>chapter.chapterContent.map(()=>time+=lecture.lectureDuration))
+            course.courseContent.map((chapter)=>chapter.chapterContent.map((lecture)=>time+=lecture.lectureDuration))
            return humanizeDuration(time * 60 * 1000,{units:["h","m"]})
 
 
