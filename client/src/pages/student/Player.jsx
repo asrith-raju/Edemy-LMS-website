@@ -16,6 +16,14 @@ const Player = () => {
     })
   }
 
+  const toggleSection = (index) => {
+    setOpenSections((prev) => (
+      {
+        ...prev,
+        [index]: !prev[index]
+      }
+    ))
+  } 
   
   useEffect(() => {
    getCourseData()
