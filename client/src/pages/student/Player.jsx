@@ -1,16 +1,16 @@
 import React, { useContext, useState,useEffect } from 'react'
 import { AppContext } from '../../context/AppContext'
-import { useParams } from 'react-router-dom'
 import { assets } from '../../assets/assets'
 import humanizeDuration from 'humanize-duration'
+import { useParams } from 'react-router-dom'
 
 const Player = () => {
   const {enrolledCourses, calculateChapterTime} = useContext(AppContext)
-  const {courseId} = useParams()
+  const {courseId}= useParams()
+  
   const [courseData,setCourseData] = useState(null)
   const [openSections,setOpenSections] = useState({})
   const [playerData,setPlayerData] = useState(null)
-
   const getCourseData = ()=>{
     enrolledCourses.map((course)=>{
       if(course._id === courseId){
