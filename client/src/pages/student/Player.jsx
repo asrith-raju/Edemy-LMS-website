@@ -8,6 +8,14 @@ const Player = () => {
   const [courseData,setCourseData] = useState(null)
   const [openSections,setOpenSections] = useState({})
 
+  const getCourseData = ()=>{
+    enrolledCourses.map((course)=>{
+      if(course._id === courseId){
+        setCourseData(course)
+      }
+    })
+  }
+
   
   useEffect(() => {
    getCourseData()
