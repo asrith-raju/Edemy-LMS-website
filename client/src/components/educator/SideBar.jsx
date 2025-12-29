@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../../context/AppContext';
+import { NavLink } from 'react-router-dom';
+import { assets } from '../../assets/assets';
 
 const SideBar = () => {
 
@@ -10,9 +12,14 @@ const SideBar = () => {
 { name: 'My Courses', path: '/educator/my-courses', icon: assets.my_course_icon },
 { name: 'Student Enrolled', path: '/educator/student-enrolled', icon: assets.person_tick_icon },
 ];
-  return (
-    <div>
-    
+  return  isEducator &&(
+    <div className='md:w-64 w-16 border-r min-h-screen text-base border-gray-500 py-2 flex flex-col'>
+    {menuItems.map((item)=>{
+      <NavLink>
+        <img src={item.icon} alt=""  className='w-6 h-6 '/>
+        <p className='md:block hidden text-center'>{item.name}</p>
+      </NavLink>
+    })}
     </div>
   )
 }

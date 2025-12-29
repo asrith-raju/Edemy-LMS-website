@@ -7,7 +7,7 @@ const Educator = () => {
     <div className='text-default min-h-screen bg-white'>
       <Navbar/>
       <div> 
-        {<Outlet/>}
+        {<Outlet/>} 
         </div>
     </div>
   )
