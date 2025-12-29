@@ -4,7 +4,7 @@ import Navbar from '../../components/educator/Navbar'
 
 const Educator = () => {
   return (
-    <div>
+    <div className='text-default min-h-screen bg-white'>
       <Navbar/>
       <div> 
         {<Outlet/>}
