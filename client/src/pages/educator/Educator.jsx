@@ -1,11 +1,14 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Navbar from '../../components/educator/Navbar'
 
 const Educator = () => {
   return (
     <div>
-      <h1>Educator page</h1>
-      <div> {<Outlet/>}</div>
+      <Navbar/>
+      <div> 
+        {<Outlet/>}
+        </div>
     </div>
   )
 }
