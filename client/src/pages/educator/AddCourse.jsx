@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef,useState } from 'react'
 import uniqid from 'uniqid'
 import Quill from 'quill'
 
@@ -11,9 +11,29 @@ const AddCourse = () => {
   const [discount, setDiscount] = useState(0)
   const [image, setImage] = useState(null)
   const [chapters, setChapters] = useState([])
+  const [showPopUp, setShowPopUp] = useState(false)
+  const [currentChapterId, setCurrentChapterId] = useState(null)
+
+  const [lectureDetails, setLectureDetails] = useState(
+    {
+      lectureTitle:'',
+      lectureDuration:'',
+      lectureUrl:'',
+      isPreviewFree:false, 
+    }
+  )
+
+ useEffect(() => {
+   if(!quillRef.current && editorRef.current){
+    quillRef.current = new Quill(editorRef.current,{
+      theme:'snow',
+    }); 
+   }
+ }, [])
+ 
   return (
     <div>
-      <h1>Add course page</h1>
+      
     </div>
   )
 }
