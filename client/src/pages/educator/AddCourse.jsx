@@ -111,6 +111,20 @@ const AddCourse = () => {
                   value={lectureDetails.lectureDuration}
                   onChange={(e)=>setLectureDetails({...lectureDetails,lectureDuration:e.target.value})}/>
                 </div>
+
+                <div className='mb-2'>
+                  <p>Duration Url</p>
+                  <input type="text" className='mt-1 block w-full border rounded py-1 px-2'
+                  value={lectureDetails.lectureUrl}
+                  onChange={(e)=>setLectureDetails({...lectureDetails,lectureUrl:e.target.value})}/>
+                </div>
+
+                <div className='flex gap-2 my-4'>
+                  <p>Is Preview Free</p>
+                  <input type="checkbox" className='mt-1 scale-125'
+                  value={lectureDetails.isPreviewFree}
+                  onChange={(e)=>setLectureDetails({...lectureDetails,isPreviewFree:e.target.checked})}/>
+                </div> 
               </div>
             </div>
           )
