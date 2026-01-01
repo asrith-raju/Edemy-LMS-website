@@ -43,7 +43,18 @@ const AddCourse = () => {
           <p>Course Description</p>
           <div ref={editorRef}></div>
         </div>
- 
+         
+         <div className='flex items-center justify-between flex-wrap' >
+            <div className='flex flex-col gap-1'>
+               <p>Course Price</p>
+               <input onChange={e=>setCoursePrice(e.target.value)} value={coursePrice} type="number" placeholder='0' className='outline-none md:py-2.5 w-28 py-2 px-3 rounded border border-gray-500' />
+            </div>
+        
+
+      
+        </div>
+
+        
     
       </form>
     </div>
