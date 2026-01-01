@@ -124,7 +124,12 @@ const AddCourse = () => {
                   <input type="checkbox" className='mt-1 scale-125'
                   value={lectureDetails.isPreviewFree}
                   onChange={(e)=>setLectureDetails({...lectureDetails,isPreviewFree:e.target.checked})}/>
-                </div> 
+                </div>
+
+                <button type='button' className='w-full bg-blue-400 text-white px-4 py-2 rounded'>Add</button> 
+
+                <img onClick={()=>setShowPopUp(false)} src={assets.cross_icon} alt="" 
+                className='absolute top-4 right-4 w-4 cursor-pointer'/>
               </div>
             </div>
           )
