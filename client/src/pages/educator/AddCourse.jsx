@@ -33,7 +33,7 @@ const AddCourse = () => {
           chapterTitle:title,
           chapterContent:[],
           collapsed : false,
-          chapterOrder:chapter.length > 0 ? chapters.slice(-1)[0].chapterOrder + 1:1,
+          chapterOrder:chapters.length > 0 ? chapters.slice(-1)[0].chapterOrder + 1:1,
         }
         setChapters([...chapters,newChapter])
       }
@@ -43,6 +43,23 @@ const AddCourse = () => {
         setChapters(chapters.map((chapter)=> chapter.chapterId === chapterId ? {...chapter,collapsed:!chapter.collapsed}:chapter))
     }
   }
+
+
+  const handleLecture = (action,chapterId) =>{
+    if(action === 'add'){ 
+      setCurrentChapterId(chapterId)
+      setShowPopUp(true)
+    }else if(action === 'remove'){
+        setChapters(chapters.map((chapter)=>{
+          if(chapter.chapterId === chapterId){
+            chapter.chapterContent.splice(lectureIndex,1)
+          }
+             return chapter; 
+    }));
+      
+    }
+  }
+
 
   useEffect(() => {
     if (!quillRef.current && editorRef.current) {
