@@ -119,10 +119,10 @@ const AddCourse = () => {
                     {chapter.chapterContent.map((lecture,lectureIndex)=>(
                       <div key={lectureIndex} className='flex justify-between items-center mb-2' >
                         <span>{lectureIndex+1}{lecture.lectureTitle} - {lecture.lectureDuration} mins - <a href={lecture.lectureUrl} target='_blank' className='text-blue-500'>Link</a> - {lecture.isPreviewFree ? 'Free Prebiew':'Paid'}</span>
-                        <img src={assets.cross_icon} alt="" className='cursor-pointer'/>
+                        <img onClick={()=>handleLecture('remove',chapter.chapterId,lectureIndex)} src={assets.cross_icon} alt="" className='cursor-pointer'/>
                       </div>
                     ))}
-                    <div className='inline-flex bg-gray-100 p-2 rounded cursor-pointer mt-2'>
+                    <div onClick={()=>handleLecture('add',chapter.chapterId)} className='inline-flex bg-gray-100 p-2 rounded cursor-pointer mt-2'>
                       + Add Lecture
                     </div>
                   </div>
