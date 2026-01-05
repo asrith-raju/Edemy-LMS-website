@@ -41,6 +41,10 @@ export const AppContextProvider = (props)=>{
 
      //Fetch User Data
      const fetchUserData = async()=>{
+
+       if(user.publicMetadata.role === 'educator'){
+         setisEducator(true)
+       }
       try {
          const token = await getToken()
         const {data} =  await axios.get(backendURL + "/api/user/data",{headers:{Authorization:`Bearer ${token}`}}) 
@@ -107,14 +111,10 @@ export const AppContextProvider = (props)=>{
         fetchUserEnrolledCourses()
      },[])
 
-     const logToken = async ()=>{
-      console.log(await getToken());
-      
-     }
 
      useEffect(() => {
        if(user){
-       logToken()
+       fetchUserData()
        }
      }, [user])
      
