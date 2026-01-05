@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import humanizeDuration from "humanize-duration"
 import axios from "axios";
 import {useAuth,useUser} from "@clerk/clerk-react"
+import { toast } from "react-toastify";
 
 
 export const AppContext = createContext()
@@ -19,8 +20,9 @@ export const AppContextProvider = (props)=>{
     const {user}=useUser()
     
      const [allCourses , setAllCourses] = useState([])
-    const [isEducator , setisEducator] = useState(true)
+    const [isEducator , setisEducator] = useState(false)
     const [enrolledCourses , setEnrolledCourses] = useState([])
+    const [userData , setUserData] = useState(null)
 
      //fetch all courses
 
@@ -30,11 +32,26 @@ export const AppContextProvider = (props)=>{
        if(data.success){
          setAllCourses(data.courses)
        }else{
-       
+       toast.error(data.message)
        }
        } catch (error) {
-         
+         toast.error(error.message)
        }
+     }
+
+     //Fetch User Data
+     const fetchUserData = async()=>{
+      try {
+         const token = await getToken()
+        const {data} =  await axios.get(backendURL + "/api/user/data",{headers:{Authorization:`Bearer ${token}`}}) 
+        if(data.success){
+         setUserData(data.user)
+        }else{
+         toast.error(data.message)
+        }
+      } catch (error) {
+         toast.error(error.message)
+      }
      }
 
      //function to calculate the average rating course
