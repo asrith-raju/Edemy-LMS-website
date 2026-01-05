@@ -22,7 +22,7 @@ const CourseDetails = () => {
 
   const [playerData, setPlayerData] = useState(null)
 
-  const { allCourses, calculateRating, calculateChapterTime, calculateNoOfLectures, CalculateCourseDuration, currency,backendUrl,userData} = useContext(AppContext)
+  const { allCourses, calculateRating, calculateChapterTime, calculateNoOfLectures, CalculateCourseDuration, currency,backendUrl,userData,getToken} = useContext(AppContext)
 
 
   const fetchCourseData = async() => {
@@ -38,9 +38,39 @@ const CourseDetails = () => {
     }
   }
 
+  const enrollCourse = async()=>{
+    try {
+      if(!userData){
+        return toast.warn('Login to Enroll')
+      }
+      if(isAlreadyEnrolled){
+        return toast.warn('Already Enrolled')
+      }
+      const token = await getToken()
+
+      const {data} = await axios.post(backendUrl+'/api/user/purchase',{courseId:courseData._id},{headers:{Authorization:`Bearer ${token}`}})
+      if(data.success){
+        const {session_url} = data
+        window.location.replace(session_url)
+      }else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+
   useEffect(() => {
     fetchCourseData()
-  }, [allCourses])
+  }, [])
+
+  useEffect(() => {
+    if(userData && courseData){
+      setIsAlreadyEnrolled(userData.enrolledCourses.includes(courseData._id))
+    }
+      }, [userData,courseData])
+
 
   const toggleSection = (index) => {
     setOpenSections((prev) => (
@@ -75,7 +105,7 @@ const CourseDetails = () => {
             <p className='text-blue-600'>({courseData.courseRatings.length}  {courseData.courseRatings.length > 1 ? 'ratings' : 'rating'})</p>
             <p>{courseData.enrolledStudents.length} {courseData.enrolledStudents.length > 1 ? 'students' : 'student'}</p>
           </div>
-          <p className='text-sm'>Course by <span className='text-blue-600 underline'>Asrith Raju</span></p>
+          <p className='text-sm'>Course by <span className='text-blue-600 underline'>{courseData.educator.name }</span></p>
           <div className='pt-8 text-gray-800'>
             <h2 className='text-xl font-semibold'>Course Structure</h2>
             <div className='pt-5'>
