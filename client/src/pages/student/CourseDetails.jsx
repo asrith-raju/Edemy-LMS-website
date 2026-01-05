@@ -197,7 +197,7 @@ const CourseDetails = () => {
               
             </div>
 
-            <button className='py-3 md:mt-6 mt-4 rounded bg-blue-600 text-white w-full font-medium '>{isAlreadyEnrolled ? 'Already Enrolled' : 'Enroll Now'}</button>
+            <button onClick={enrollCourse} className='py-3 md:mt-6 mt-4 rounded bg-blue-600 text-white w-full font-medium '>{isAlreadyEnrolled ? 'Already Enrolled' : 'Enroll Now'}</button>
 
             <div className='pt-6'>
                 <p className='md:text-xl text-xl font-medium text-gray-800 '>What's in the course?</p>
