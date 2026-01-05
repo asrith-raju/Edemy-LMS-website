@@ -23,7 +23,11 @@ export const AppContextProvider = (props)=>{
      //fetch all courses
 
      const fetchAllCourses = async()=>{
-        setAllCourses(dummyCourses)
+       try {
+         
+       } catch (error) {
+         
+       }
      }
 
      //function to calculate the average rating course
