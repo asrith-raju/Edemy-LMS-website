@@ -7,6 +7,8 @@ import { assets } from '../../assets/assets'
 import humanizeDuration from 'humanize-duration'
 import Footer from '../../components/student/Footer'
 import YouTube from 'react-youtube'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const CourseDetails = () => {
 
@@ -20,12 +22,20 @@ const CourseDetails = () => {
 
   const [playerData, setPlayerData] = useState(null)
 
-  const { allCourses, calculateRating, calculateChapterTime, calculateNoOfLectures, CalculateCourseDuration, currency } = useContext(AppContext)
+  const { allCourses, calculateRating, calculateChapterTime, calculateNoOfLectures, CalculateCourseDuration, currency,backendUrl,userData} = useContext(AppContext)
 
 
-  const fetchCourseData = () => {
-    const findCourse = allCourses.find(course => course._id === id)
-    setCourseData(findCourse)
+  const fetchCourseData = async() => {
+    try {
+      const {data} = await axios.get(backendUrl+'/api/course/'+id)
+      if(data.success){
+        setCourseData(data.courseData)
+      }else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
   }
 
   useEffect(() => {
