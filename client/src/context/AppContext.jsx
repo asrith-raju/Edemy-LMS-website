@@ -102,7 +102,14 @@ export const AppContextProvider = (props)=>{
 
     //Fetch user Enrolled Courses
     const fetchUserEnrolledCourses = async ()=>{
-      setEnrolledCourses(dummyCourses)
+      const token = await getToken()
+      const {data} = await axios.get(backendURL + "/api/user/enrolledCourses",{headers:{Authorization:`Bearer ${token}`}})
+
+      if(data.success){
+        setEnrolledCourses(data.enrolledCourses.reverse())
+      }else{
+        toast.error(data.message)
+      }
     }
 
 
@@ -120,7 +127,7 @@ export const AppContextProvider = (props)=>{
      
 
     const value={
-           currency,allCourses,navigate,calculateRating,isEducator,setisEducator,calculateChapterTime,calculateNoOfLectures,CalculateCourseDuration,enrolledCourses,fetchUserEnrolledCourses
+           currency,allCourses,navigate,calculateRating,isEducator,setisEducator,calculateChapterTime,calculateNoOfLectures,CalculateCourseDuration,enrolledCourses,fetchUserEnrolledCourses,backendURL,userData,setUserData,getToken,fetchAllCourses,fetchAllCourses
     }
     return (
         <AppContext.Provider value={value}>
