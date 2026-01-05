@@ -68,7 +68,7 @@ export const AppContextProvider = (props)=>{
          course.courseRatings.forEach(rating =>{
             totalRating += rating.rating
          })
-         return totalRating/course.courseRatings.length
+         return Math.floor(totalRating/course.courseRatings.length)
      }
      //Function to calculate Course Chapter Time
 
@@ -104,7 +104,7 @@ export const AppContextProvider = (props)=>{
     const fetchUserEnrolledCourses = async ()=>{
       try {
          const token = await getToken()
-      const {data} = await axios.get(backendURL + "/api/user/enrolledCourses",{headers:{Authorization:`Bearer ${token}`}})
+      const {data} = await axios.get(backendURL + "/api/user/enrolled-courses",{headers:{Authorization:`Bearer ${token}`}})
 
       if(data.success){
         setEnrolledCourses(data.enrolledCourses.reverse())
@@ -120,13 +120,14 @@ export const AppContextProvider = (props)=>{
 
      useEffect(()=>{
         fetchAllCourses()
-        fetchUserEnrolledCourses()
+       
      },[])
 
 
      useEffect(() => {
        if(user){
        fetchUserData()
+       fetchUserEnrolledCourses()
        }
      }, [user])
      
