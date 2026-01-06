@@ -3,31 +3,31 @@ import { AppContext } from '../../context/AppContext'
 import { useState } from 'react'
 import {Line} from 'rc-progress'
 import Footer from '../../components/student/Footer'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const MyEnrollments = () => {
 
-  const {enrolledCourses ,CalculateCourseDuration,navigate} = useContext(AppContext)
+  const {enrolledCourses ,CalculateCourseDuration,navigate,userData,fetchUserEnrolledCourses,backendURL,getToken,calculateNoOfLectures} = useContext(AppContext)
 
-  const [progressArray, setProgressArray] = useState([
-    {lectureCompleted:2,totalLectures:4},
-    {lectureCompleted:3,totalLectures:0},
-    {lectureCompleted:0,totalLectures:5},
-    {lectureCompleted:5,totalLectures:5},
-    {lectureCompleted:1,totalLectures:9},
-    {lectureCompleted:3,totalLectures:5},
-    {lectureCompleted:2,totalLectures:5},
-    {lectureCompleted:2,totalLectures:4},
-    {lectureCompleted:1,totalLectures:9},
-    {lectureCompleted:2,totalLectures:7},
-    {lectureCompleted:5,totalLectures:7},
-    {lectureCompleted:2,totalLectures:4},
-    {lectureCompleted:2,totalLectures:4},
-    {lectureCompleted:2,totalLectures:4},
-    {lectureCompleted:5,totalLectures:10},
-    {lectureCompleted:2,totalLectures:4},
-    {lectureCompleted:0,totalLectures:4},
-    {lectureCompleted:1,totalLectures:4}
-  ])
+  const [progressArray, setProgressArray] = useState([])
+
+  const getcourseProgress = async ()=>{
+    try {
+      const token = await getToken()
+      const tempProgressArray = await Promise.all(enrolledCourses.map(async(course)=>{
+         const {data} = await axios.post(`${backendURL}/api/user/get-course-progress`,{courseId:course._id},{headers:{Authorization:`Bearer ${token}`}})
+
+         let totalLectures = calculateNoOfLectures(course)
+      const lectureCompleted= data.progressData ? lectureCompleted.length : 0
+      return {lectureCompleted,totalLectures}
+      }))
+      setProgressArray(tempProgressArray)
+
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
   return (
     <>
     <div className='md:px-36 px-8 pt-10'>

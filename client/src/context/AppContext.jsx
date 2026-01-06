@@ -133,7 +133,7 @@ export const AppContextProvider = (props)=>{
      
 
     const value={
-           currency,allCourses,navigate,calculateRating,isEducator,setisEducator,calculateChapterTime,calculateNoOfLectures,CalculateCourseDuration,enrolledCourses,fetchUserEnrolledCourses,backendURL,userData,setUserData,getToken,fetchAllCourses,fetchAllCourses
+           currency,allCourses,navigate,calculateRating,isEducator,setisEducator,calculateChapterTime,calculateNoOfLectures,CalculateCourseDuration,enrolledCourses,fetchUserEnrolledCourses,backendURL,userData,setUserData,getToken,fetchAllCourses
     }
     return (
         <AppContext.Provider value={value}>
