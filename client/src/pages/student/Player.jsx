@@ -56,6 +56,7 @@ const Player = () => {
 
       if(data.success){
         toast.success(data.message)
+        getCourseProgress()
       }else{
         toast.error(data.message)
       }
