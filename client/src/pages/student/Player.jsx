@@ -63,6 +63,20 @@ const Player = () => {
       toast.error(error.message)
     }
   }
+
+  const getCourseProgress = async()=>{
+    try {
+      const token = await getToken()
+      const {data} = await axios.post(backendUrl+'/api/user/get-course-progress',{courseId},{headers:{Authorization:`Bearer ${token}`}})
+      if(data.success){
+        setProgressData(data.progressData)
+      }else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
   
   return (
     <>
