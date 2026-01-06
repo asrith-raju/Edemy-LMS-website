@@ -8,19 +8,28 @@ import Footer from '../../components/student/Footer'
 import Rating from '../../components/student/Rating'
 
 const Player = () => {
-  const {enrolledCourses, calculateChapterTime} = useContext(AppContext)
+  const {enrolledCourses, calculateChapterTime,backendUrl,getToken,userData,fetchUserEnrolledCourses} = useContext(AppContext)
   const {courseId}= useParams()
   
   const [courseData,setCourseData] = useState(null)
   const [openSections,setOpenSections] = useState({})
   const [playerData,setPlayerData] = useState(null)
+  const [progressData,setProgressData] = useState(null)
+  const [initialRating,setInitialRating] = useState(0)
+
   const getCourseData = ()=>{
     enrolledCourses.map((course)=>{
       if(course._id === courseId){
         setCourseData(course)
-      }
+        course.courseRatings.map((rating)=>{
+        if(item.userId === userData._id){
+          setInitialRating(item.rating)
+        }
+      })
+    }
     })
   }
+
 
   const toggleSection = (index) => {
     setOpenSections((prev) => (
