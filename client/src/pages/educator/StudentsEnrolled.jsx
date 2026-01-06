@@ -27,8 +27,8 @@ const StudentsEnrolled = () => {
 
  useEffect(() => {
   if(isEducator){
-    fetchEnrolledStudents()
 
+    fetchEnrolledStudents()
   }
     
    
