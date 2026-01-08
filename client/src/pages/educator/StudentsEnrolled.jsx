@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 const StudentsEnrolled = () => {
 
-  const {backendURL} = useContext(AppContext)
+  const {backendURL,isEducator,getToken} = useContext(AppContext)
  const [enrolledStudents, setEnrolledStudents] = useState(null)
 
  const fetchEnrolledStudents = async ()=>{
