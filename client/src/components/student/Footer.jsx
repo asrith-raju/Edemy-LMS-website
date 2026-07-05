@@ -55,7 +55,7 @@ const Footer = () => {
 
       {/* Bottom copyright section */}
       <p className='py-4 text-center text-xs md:text-sm text-white/80'>
-        Copyright 2025 @ GreatStack.All Right Reserved.
+        Copyright 2026 @ GreatStack.All Right Reserved.
       </p>
     </footer>
   )
